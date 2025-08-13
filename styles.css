@@ -1,69 +1,109 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+/* Сброс базовых параметров, установка шрифта */
 * {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
     font-family: "Montserrat";
 }
-
+/* Стиль для бади */
 body {
     height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(255, 255, 255);
 }
-
+/* Стиль для основного контейнера */
 #mainContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1em;
 }
-
+/* Стиль для поля */
 #field {
     display: flex;
-    height: 900px;
-    width: 900px;
+    height: 608px;
+    width: 608px;
     flex-wrap: wrap;
+    gap: 4px;
 }
-
+/* Стиль поля, где выводится результат */
 #result {
-    height: 900px;
-    width: 300px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    margin-top: 2em;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
 }
-
+/* Стиль стартового окна */
 #welcomeScreen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50%;
+    height: 100%;
+    gap: 2em;
 }
-
+/* Стиль для скрытого стартового окна */
 #welcomeScreen.hidden {
     display: none;
 }
-
+/* Стиль для скрытого основного контейнера */
 #mainContainer.hidden {
     display: none;
 }
-
+/* Стиль прозрачности основного контейнера */
+#mainContainer.transparent {
+    opacity: 10%;
+}
+/* Стиль финального окна */
+#finalScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4em;
+    border-radius: 1em;
+    height: 50%;
+    gap: 2em;
+    font-size: 4em;
+    position: fixed;
+    background-color: rgb(143, 143, 143);
+}
+/* Стиль скрытого финального окна */
+#finalScreen.hidden {
+    display: none;
+}
+/* Стили для клеток */
 .cell {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 4em;
+    font-weight: bold;
+    background-color: rgb(197, 197, 197);
 }
-
+/* Стиль для подсветки выигрышной комбинации клеток */
 .cell.winner {
-    background-color: green;
+    background-color: white;
+}
+/* Стили для кнопок сброса и начала игры */
+.resetButton,
+#startGame {
+    padding: 1em;
+    border: 0;
+    cursor: pointer;
+    background-color: rgb(196, 196, 196);
+    border-radius: 1em;
+}
+/* Стили для наведения на кнопки */
+.resetButton:hover,
+#startGame:hover {
+    background-color: rgb(206, 205, 205);
 }
