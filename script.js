@@ -13,19 +13,23 @@ const state = {
     currentPlayer: "X",
     moves: 0,
     gameOver: false,
-};
+    resetButton: null,
+}
 
 const elements = {
     cells: document.querySelectorAll(".cell"),
     field: document.querySelector("#field"),
     result: document.querySelector("#result"),
-};
+    startGame: document.querySelector("#startGame"),
+    mainContainer: document.querySelector("#mainContainer"),
+    welcomeScreen: document.querySelector("#welcomeScreen"),
+}
 
-elements.result.textContent = `Ходит ${state.currentPlayer}`;
+elements.result.textContent = `Ходит ${state.currentPlayer}`
 
 const switchPlayer = () => {
-    state.currentPlayer = state.currentPlayer === "X" ? "O" : "X";
-};
+    state.currentPlayer = state.currentPlayer === "X" ? "O" : "X"
+}
 
 const checkWinner = () => {
     for (let [a, b, c] of state.winConditions) {
@@ -34,48 +38,72 @@ const checkWinner = () => {
             state.board[a] === state.board[b] &&
             state.board[a] === state.board[c]
         ) {
-            highlightCells(a, b, c);
-            return true;
+            highlightCells(a, b, c)
+            return true
         }
     }
-    return false;
-};
+    return false
+}
 
 const highlightCells = (a, b, c) => {
-    elements.cells[a].classList.add("winner");
-    elements.cells[b].classList.add("winner");
-    elements.cells[c].classList.add("winner");
-};
+    elements.cells[a].classList.add("winner")
+    elements.cells[b].classList.add("winner")
+    elements.cells[c].classList.add("winner")
+}
 
 const checkDraw = () => {
     if (!state.gameOver && state.moves === 9) {
-        return true;
+        return true
     }
-    return false;
-};
+    return false
+}
 
 const move = (input) => {
-    if (state.board[input] !== "" || state.gameOver === true) return;
-    state.board[input] = state.currentPlayer;
-    elements.cells[input].textContent = state.currentPlayer;
-    state.moves++;
-    console.log(state.board);
+    if (state.board[input] !== "" || state.gameOver === true) return
+    state.board[input] = state.currentPlayer
+    elements.cells[input].textContent = state.currentPlayer
+    state.moves++
+    console.log(state.board)
     if (checkWinner()) {
-        state.gameOver = true;
-        elements.result.textContent = `Победил ${state.currentPlayer}`;
+        state.gameOver = true
+        elements.result.textContent = `Победил ${state.currentPlayer}`
+        createResetButton()
     }
     if (checkDraw()) {
-        state.gameOver = true;
-        elements.result.textContent = `Ничья`;
+        state.gameOver = true
+        elements.result.textContent = `Ничья`
+        createResetButton()
     }
     if (!state.gameOver) {
-        switchPlayer();
-        elements.result.textContent = `Ходит ${state.currentPlayer}`;
+        switchPlayer()
+        elements.result.textContent = `Ходит ${state.currentPlayer}`
     }
-};
+}
+
+const createResetButton = () => {
+    const resetButton = document.createElement("button")
+    resetButton.textContent = "Новая игра"
+    elements.result.appendChild(resetButton)
+    resetButton.addEventListener("click", () => {
+        elements.cells.forEach((cell) => {
+            cell.textContent = ""
+            cell.classList.remove("winner")
+        })
+        state.board = ["", "", "", "", "", "", "", "", ""]
+        state.gameOver = false
+        state.moves = 0
+        state.currentPlayer = "X"
+        elements.result.textContent = `Ходит ${state.currentPlayer}`
+    })
+}
 
 elements.cells.forEach((cell, index) => {
     cell.addEventListener("click", () => {
-        move(index);
-    });
-});
+        move(index)
+    })
+})
+
+elements.startGame.addEventListener("click", () => {
+    elements.mainContainer.classList.remove("hidden")
+    elements.welcomeScreen.classList.add("hidden")
+})
