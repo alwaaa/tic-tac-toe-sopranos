@@ -3,7 +3,7 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family: "Roboto Mono";
+    font-family: "Montserrat";
 }
 
 body {
@@ -31,9 +31,27 @@ body {
     height: 900px;
     width: 300px;
     display: flex;
+    flex-direction: column;
+    gap: 1em;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+}
+
+#welcomeScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+#welcomeScreen.hidden {
+    display: none;
+}
+
+#mainContainer.hidden {
+    display: none;
 }
 
 .cell {
