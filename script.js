@@ -65,7 +65,6 @@ const checkDraw = () => {
 }
 // Основная функция хода
 const move = (input) => {
-    if (state.board[input] !== "" || state.gameOver === true) return
     state.board[input] = state.currentPlayer
     state.moves++
     state.currentPlayer === "X"
@@ -74,6 +73,7 @@ const move = (input) => {
 }
 // Основная функция игры
 const game = (input) => {
+    if (state.board[input] !== "" || state.gameOver === true) return
     move(input)
     if (checkWinner()) {
         state.gameOver = true
