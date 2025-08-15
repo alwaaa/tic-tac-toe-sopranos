@@ -26,7 +26,7 @@ const elements = {
     finalScreen: document.querySelector("#finalScreen"),
 }
 const playGunShot = () => {
-    const audio = new Audio(`/sfx/gunshot.mp3`)
+    const audio = new Audio(`./sfx/gunshot.mp3`)
     audio.loop = false
     audio.play()
 }
