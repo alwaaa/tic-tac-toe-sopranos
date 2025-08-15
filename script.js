@@ -25,6 +25,11 @@ const elements = {
     welcomeScreen: document.querySelector("#welcomeScreen"),
     finalScreen: document.querySelector("#finalScreen"),
 }
+const playGunShot = () => {
+    const audio = new Audio(`/sfx/gunshot.mp3`)
+    audio.loop = false
+    audio.play()
+}
 // Стартовое значение поля результата
 elements.result.textContent = `Ходит ${state.currentPlayer}`
 // Переключение игрока
@@ -62,8 +67,10 @@ const checkDraw = () => {
 const move = (input) => {
     if (state.board[input] !== "" || state.gameOver === true) return
     state.board[input] = state.currentPlayer
-    elements.cells[input].textContent = state.currentPlayer
     state.moves++
+    state.currentPlayer === "X"
+        ? elements.cells[input].classList.add("tony")
+        : elements.cells[input].classList.add("chris")
 }
 // Основная функция игры
 const game = (input) => {
@@ -98,9 +105,12 @@ const createResetButton = () => {
 }
 // Функция сброса игры
 const resetGame = () => {
+    playGunShot()
     elements.cells.forEach((cell) => {
         cell.textContent = ""
         cell.classList.remove("winner")
+        cell.classList.remove("tony")
+        cell.classList.remove("chris")
     })
     state.board = ["", "", "", "", "", "", "", "", ""]
     state.gameOver = false
@@ -129,6 +139,9 @@ elements.cells.forEach((cell, index) => {
 })
 // Обработчик событий для кнопки запуска новой игры
 elements.startGame.addEventListener("click", () => {
-    elements.mainContainer.classList.remove("hidden")
-    elements.welcomeScreen.classList.add("hidden")
+    setTimeout(() => {
+        elements.mainContainer.classList.remove("hidden")
+        elements.welcomeScreen.classList.add("hidden")
+    }, 1000)
+    playGunShot()
 })
