@@ -6,13 +6,20 @@
     box-sizing: border-box;
     font-family: "Montserrat";
 }
+/* Переменные */
+:root {
+    --main-bg: #1a1a1a;
+    --text-color: #fff;
+    --accent: #8b0000;
+    --winner: #fceabb;
+}
 /* Стиль для бади */
 body {
+    background-color: var(--main-bg);
     height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 255, 255);
 }
 /* Стиль для основного контейнера */
 #mainContainer {
@@ -37,6 +44,7 @@ body {
     margin-top: 2em;
     justify-content: center;
     align-items: center;
+    color: var(--text-color);
 }
 /* Стиль стартового окна */
 #welcomeScreen {
@@ -46,6 +54,7 @@ body {
     align-items: center;
     height: 100%;
     gap: 2em;
+    color: var(--text-color);
 }
 /* Стиль для скрытого стартового окна */
 #welcomeScreen.hidden {
@@ -61,6 +70,7 @@ body {
 }
 /* Стиль финального окна */
 #finalScreen {
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,7 +81,7 @@ body {
     gap: 2em;
     font-size: 4em;
     position: fixed;
-    background-color: rgb(143, 143, 143);
+    background-color: var(--accent);
 }
 /* Стиль скрытого финального окна */
 #finalScreen.hidden {
@@ -91,7 +101,7 @@ body {
 }
 /* Стиль для подсветки выигрышной комбинации клеток */
 .cell.winner {
-    background-color: white;
+    background-color: var(--winner);
 }
 /* Стили для кнопок сброса и начала игры */
 .resetButton,
