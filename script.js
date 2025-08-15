@@ -64,10 +64,13 @@ const move = (input) => {
     state.board[input] = state.currentPlayer
     elements.cells[input].textContent = state.currentPlayer
     state.moves++
+}
+// Основная функция игры
+const game = (input) => {
+    move(input)
     if (checkWinner()) {
         state.gameOver = true
         elements.result.textContent = `Победил ${state.currentPlayer}`
-        createResetButton()
         setTimeout(() => {
             finalScreen()
         }, 1000)
@@ -85,37 +88,43 @@ const move = (input) => {
         elements.result.textContent = `Ходит ${state.currentPlayer}`
     }
 }
-// Функция кнопки сброса
+// Функция создания кнопки сброса
 const createResetButton = () => {
     const resetButton = document.createElement("button")
     resetButton.classList.add("resetButton")
     resetButton.textContent = "Новая игра"
     elements.finalScreen.appendChild(resetButton)
-    resetButton.addEventListener("click", () => {
-        elements.cells.forEach((cell) => {
-            cell.textContent = ""
-            cell.classList.remove("winner")
-        })
-        state.board = ["", "", "", "", "", "", "", "", ""]
-        state.gameOver = false
-        state.moves = 0
-        state.currentPlayer = "X"
-        elements.finalScreen.classList.add("hidden")
-        elements.mainContainer.classList.remove("transparent")
-        elements.result.textContent = `Ходит ${state.currentPlayer}`
+    return resetButton
+}
+// Функция сброса игры
+const resetGame = () => {
+    elements.cells.forEach((cell) => {
+        cell.textContent = ""
+        cell.classList.remove("winner")
     })
+    state.board = ["", "", "", "", "", "", "", "", ""]
+    state.gameOver = false
+    state.moves = 0
+    state.currentPlayer = "X"
+    elements.finalScreen.classList.add("hidden")
+    elements.mainContainer.classList.remove("transparent")
+    elements.result.textContent = `Ходит ${state.currentPlayer}`
+}
+// Обработчик нажатия кнопки сброса
+const handleResetButton = (btn) => {
+    btn.addEventListener("click", resetGame)
 }
 // Функция финального окна
 const finalScreen = () => {
     elements.finalScreen.classList.remove("hidden")
     elements.mainContainer.classList.add("transparent")
     elements.finalScreen.textContent = elements.result.textContent
-    createResetButton()
+    handleResetButton(createResetButton())
 }
 // Обработчик событий для клеток
 elements.cells.forEach((cell, index) => {
     cell.addEventListener("click", () => {
-        move(index)
+        game(index)
     })
 })
 // Обработчик событий для кнопки запуска новой игры
