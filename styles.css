@@ -77,7 +77,8 @@ body {
     align-items: center;
     padding: 4em;
     border-radius: 1em;
-    height: 50%;
+    max-height: 50%;
+    max-width: 50%;
     gap: 2em;
     font-size: 4em;
     position: fixed;
@@ -131,4 +132,27 @@ body {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+@media (max-width: 980px) {
+    #field {
+        height: 434px;
+        width: 434px;
+    }
+
+    .cell {
+        height: 142px;
+        width: 142px;
+    }
+}
+
+@media (max-width: 734px) {
+    #field {
+        height: 278px;
+        width: 278px;
+    }
+    .cell {
+        height: 90px;
+        width: 90px;
+    }
 }
