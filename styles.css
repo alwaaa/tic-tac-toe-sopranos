@@ -52,6 +52,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100%;
     gap: 2em;
     color: var(--text-color);
@@ -75,7 +76,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4em;
+    padding: 1em;
     border-radius: 1em;
     max-height: 50%;
     max-width: 50%;
@@ -139,6 +140,12 @@ body {
         height: 434px;
         width: 434px;
     }
+    #welcomeScreen {
+        font-size: 10px;
+    }
+    #finalScreen {
+        font-size: 2em;
+    }
 
     .cell {
         height: 142px;
@@ -154,5 +161,8 @@ body {
     .cell {
         height: 90px;
         width: 90px;
+    }
+    #finalScreen {
+        font-size: 1em;
     }
 }
